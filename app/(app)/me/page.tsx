@@ -5,6 +5,7 @@ import { PageContainer } from '@/components/layout/page-container';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useRouter } from 'next/navigation';
+import { Link } from 'next/link';
 import { ArrowRight, User, Settings, Shield, HelpCircle, LogOut, Eye, Clock, Lock, Smartphone } from 'lucide-react';
 import { useAuth } from '@/contexts/auth-context';
 import { useApiOpts } from '@/hooks/use-api';
@@ -102,18 +103,20 @@ export default function MePage() {
                 {section.items.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <button key={item.href} onClick={() => router.push(item.href)} className="w-full text-left transition-colors active:bg-muted">
-                      <div className="rounded-lg border border-border bg-card p-4 flex items-center justify-between gap-3">
-                        <div className="flex items-center gap-3 flex-1 min-w-0">
-                          <Icon className="w-5 h-5 text-primary flex-shrink-0" />
-                          <span className="font-medium text-foreground text-sm truncate">{item.title}</span>
+                    <Link key={item.href} href={item.href}>
+                      <button className="w-full text-left transition-colors active:bg-muted">
+                        <div className="rounded-lg border border-border bg-card p-4 flex items-center justify-between gap-3">
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <Icon className="w-5 h-5 text-primary flex-shrink-0" />
+                            <span className="font-medium text-foreground text-sm truncate">{item.title}</span>
+                          </div>
+                          <div className="flex items-center gap-2 flex-shrink-0">
+                            {item.badge && <Badge variant="secondary" className="text-xs">{item.badge}</Badge>}
+                            <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2 flex-shrink-0">
-                          {item.badge && <Badge variant="secondary" className="text-xs">{item.badge}</Badge>}
-                          <ArrowRight className="w-4 h-4 text-muted-foreground" />
-                        </div>
-                      </div>
-                    </button>
+                      </button>
+                    </Link>
                   );
                 })}
               </div>
