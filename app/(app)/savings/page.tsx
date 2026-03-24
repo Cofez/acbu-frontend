@@ -95,7 +95,6 @@ const mockGoals: SavingsGoal[] = [
 ];
 
 export default function SavingsPage() {
-  const router = useRouter();
   const opts = useApiOpts();
   const [apiUser, setApiUser] = useState('');
   const [positionsBalance, setPositionsBalance] = useState<string | number | null>(null);
